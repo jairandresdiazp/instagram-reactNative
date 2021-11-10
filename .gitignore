@@ -1,6 +1,49 @@
+### SublimeText ###
+*.sublime-workspace
+
+### VS Code ###
+*.vscode
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# App specific
 node_modules/
+docs/_book/
+.tmp
+.idea
+.build/
+#web-build/
+lib
+dist
+build
+lerna-debug.log
+yarn-error.log
+*.orig
+package-lock.json
+yarn.lock
 .expo/
-dist/
 npm-debug.*
 *.jks
 *.p8
@@ -9,6 +52,3 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
-# macOS
-.DS_Store
