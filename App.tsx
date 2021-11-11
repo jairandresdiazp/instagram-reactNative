@@ -23,7 +23,6 @@ export default function App() {
   });
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log('cambio en la autenticacion');
       if (!user) {
         setGlobalSatate({ ...globalState, loggedIn: false });
       } else {

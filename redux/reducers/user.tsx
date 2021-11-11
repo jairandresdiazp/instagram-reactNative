@@ -1,3 +1,4 @@
+import { UserStateType } from 'types-app';
 import {
   CLEAR_DATA,
   USER_FOLLOWING_STATE_CHANGE,
@@ -5,7 +6,7 @@ import {
   USER_STATE_CHANGE,
 } from '../const';
 
-const initialState = {
+const initialState: UserStateType = {
   currentUser: null,
   posts: [],
   following: [],
