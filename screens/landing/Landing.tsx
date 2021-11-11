@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Button, ScrollView, View } from 'react-native';
+import styles from '../styles';
 
 interface LandingProps {
   route: any;
@@ -8,30 +9,25 @@ interface LandingProps {
 
 const Landing: FunctionComponent<LandingProps> = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Button
-        title="Register"
-        onPress={() => {
-          navigation.navigate('Register');
-        }}
-      ></Button>
-      <Button
-        title="Login"
-        onPress={() => {
-          navigation.navigate('Login');
-        }}
-      ></Button>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.inputGroup}>
+        <Button
+          title="Register"
+          onPress={() => {
+            navigation.navigate('Register');
+          }}
+        ></Button>
+      </View>
+      <View style={styles.inputGroup}>
+        <Button
+          title="Sign In"
+          onPress={() => {
+            navigation.navigate('SignIn');
+          }}
+        ></Button>
+      </View>
+    </ScrollView>
   );
 };
 
 export default Landing;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
