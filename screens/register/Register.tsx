@@ -26,7 +26,7 @@ const Register: FunctionComponent<RegisterProps> = ({ navigation }) => {
         .then(async (result: any) => {
           await db.collection('user').doc(result?.user?.uid).set({ user });
         })
-        .catch((error: any) => {
+        .catch((error) => {
           error?.error ? alert(error?.error?.message) : alert(error);
           console.log(`Error Firebase: ${error}`);
         });

@@ -7,7 +7,7 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { GlobalType } from 'types-app';
 import { auth } from './firebase/firebase';
-import appReducer from './redux/reducers';
+import appReducer from './redux/reducers/user';
 import Home from './screens/home/Home';
 import Landing from './screens/landing/Landing';
 import Register from './screens/register/Register';

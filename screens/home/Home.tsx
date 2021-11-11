@@ -1,10 +1,9 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { AnyAction, bindActionCreators, Dispatch } from 'redux';
-import { fetchUser } from '../../redux/actions';
-import styles from '../styles';
 import { UserStateType } from 'types-app';
+import { useActionsUser } from '../../redux/actions/user';
+import styles from '../styles';
 
 interface HomeProps {
   route: any;
@@ -12,25 +11,22 @@ interface HomeProps {
   userState: UserStateType;
 }
 
-const Home: FunctionComponent<HomeProps> = ({ navigation, userState }) => {
-  useEffect(() => {
-    fetchUser();
+const Home: FunctionComponent<HomeProps> = ({ userState }) => {
+  const actionsUser = useActionsUser();
+  useMemo(() => {
+    actionsUser.fetchUser();
   }, []);
-  console.log(`userState ${JSON.stringify(userState)}`);
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Text>User is logged in</Text>
+        <Text>User is logged in {JSON.stringify(userState)}</Text>
       </View>
     </ScrollView>
   );
 };
 
 const mapStateToProps = (store: any) => ({
-  userState: store.userState,
+  userState: store,
 });
 
-const mapDispatchProps = (dispatch: Dispatch<AnyAction>) =>
-  bindActionCreators({ fetchUser }, dispatch);
-
-export default connect(mapStateToProps, mapDispatchProps)(Home);
+export default connect(mapStateToProps)(Home);
