@@ -8,10 +8,11 @@ import thunk from 'redux-thunk';
 import { GlobalType } from 'types-app';
 import { auth } from './firebase/firebase';
 import appReducer from './redux/reducers/user';
-import Home from './screens/home/Home';
-import Landing from './screens/landing/Landing';
-import Register from './screens/register/Register';
-import SignIn from './screens/signIn/SignIn';
+import HomeScreen from './screens/home/Home';
+import AddScreen from './screens/add/Add';
+import LandingScreen from './screens/landing/Landing';
+import RegisterScreen from './screens/register/Register';
+import SignInScreen from './screens/signIn/SignIn';
 import styles from './screens/styles';
 const store = createStore(appReducer, applyMiddleware(thunk));
 
@@ -43,7 +44,12 @@ export default function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Add" component={AddScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
@@ -54,17 +60,17 @@ export default function App() {
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen
           name="Landing"
-          component={Landing}
+          component={LandingScreen}
           options={{ title: 'Landing', headerShown: false }}
         />
         <Stack.Screen
           name="Register"
-          component={Register}
+          component={RegisterScreen}
           options={{ title: 'Register' }}
         />
         <Stack.Screen
           name="SignIn"
-          component={SignIn}
+          component={SignInScreen}
           options={{ title: 'Sign In' }}
         />
       </Stack.Navigator>

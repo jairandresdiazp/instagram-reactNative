@@ -1,9 +1,11 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { FunctionComponent, useMemo } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { UserStateType } from 'types-app';
 import { useActionsUser } from '../../redux/actions/user';
-import styles from '../styles';
+import EmptyScreen from '../Empty';
+import FeedScreen from '../feed/Feed';
 
 interface HomeProps {
   route: any;
@@ -11,17 +13,95 @@ interface HomeProps {
   userState: UserStateType;
 }
 
-const Home: FunctionComponent<HomeProps> = ({ userState }) => {
+const Home: FunctionComponent<HomeProps> = () => {
+  const Tab = createBottomTabNavigator();
   const actionsUser = useActionsUser();
   useMemo(() => {
     actionsUser.fetchUser();
   }, []);
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <Text>User is logged in {JSON.stringify(userState)}</Text>
-      </View>
-    </ScrollView>
+    <Tab.Navigator
+      initialRouteName="Feed"
+      screenOptions={() => ({
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'gray',
+        tabBarShowLabel: false
+      })}
+    >
+      <Tab.Screen
+        name="Feed"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? 'home' : 'home-outline';
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? 'magnify' : 'magnify';
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="AddTab"
+        component={EmptyScreen}
+        listeners={({ navigation }) => ({
+          tabPress: (event) => {
+            event.preventDefault();
+            navigation.navigate('Add');
+          },
+        })}
+        options={{
+          tabBarLabel: "Add",
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? 'plus-box' : 'plus-box-outline';
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused
+              ? 'account-circle'
+              : 'account-circle-outline';
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 
