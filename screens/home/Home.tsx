@@ -23,9 +23,10 @@ const Home: FunctionComponent<HomeProps> = () => {
     <Tab.Navigator
       initialRouteName="Feed"
       screenOptions={() => ({
+        headerShown: false,
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
-        tabBarShowLabel: false
+        tabBarShowLabel: false,
       })}
     >
       <Tab.Screen
@@ -70,9 +71,25 @@ const Home: FunctionComponent<HomeProps> = () => {
           },
         })}
         options={{
-          tabBarLabel: "Add",
+          tabBarLabel: 'Add',
           tabBarIcon: ({ focused, color, size }) => {
             const iconName = focused ? 'plus-box' : 'plus-box-outline';
+            return (
+              <MaterialCommunityIcons
+                name={iconName}
+                size={size}
+                color={color}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Favorite"
+        component={FeedScreen}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused ? 'heart' : 'heart-outline';
             return (
               <MaterialCommunityIcons
                 name={iconName}

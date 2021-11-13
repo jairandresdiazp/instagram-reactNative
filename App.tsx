@@ -49,7 +49,11 @@ export default function App() {
               component={HomeScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Add" component={AddScreen} />
+            <Stack.Screen
+              name="Add"
+              component={AddScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
